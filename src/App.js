@@ -13,7 +13,7 @@ class App extends Component {
     // When mounted, tries to get the list of plays.
     // Renders sidebar if OK, otherwise shows error.
     componentDidMount() {
-        fetch('http://127.0.0.1:5000/plays', {
+        fetch('https://script-annotator.herokuapp.com//plays', {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }

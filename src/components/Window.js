@@ -21,7 +21,7 @@ export default class Window extends Component {
      */
     loadPlay = playname => event => {
         event.preventDefault();
-        fetch(`http://127.0.0.1:5000/play/${playname}`, {
+        fetch(`https://script-annotator.herokuapp.com/play/${playname}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }

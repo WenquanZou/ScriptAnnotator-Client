@@ -96,7 +96,7 @@ class Content extends Component {
     };
 
     submitAnnotation = event => {
-        fetch(`http://127.0.0.1:5000/submit/${this.props.filename}`, {
+        fetch(`https://script-annotator.herokuapp.com/submit/${this.props.filename}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
