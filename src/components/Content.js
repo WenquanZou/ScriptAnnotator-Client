@@ -22,15 +22,26 @@ const customStyles = {
 
 class Content extends Component {
 
-    state = {
-        annotations: [],
-        start: undefined,
-        end: undefined,
-        modalOpen: false,
 
-        annotation: undefined,
-        actionVerb: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            annotations: [],
+            start: undefined,
+            end: undefined,
+            modalOpen: false,
+
+            annotation: undefined,
+            actionVerb: '',
+
+            acts: undefined
+        };
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log(nextProps)
+        this.setState({acts: nextProps.acts});
+    }
 
     storeLineNum = key => (lineNum, speaker, speechKey) => event => {
         if (event.button === 2) return;
@@ -41,7 +52,7 @@ class Content extends Component {
         this.setState({actionVerb: event.target.value})
     };
 
-    saveActionVerb = event => {
+    saveActionVerb = () => {
         this.setState(prevState => {
             const {annotations} = prevState;
             annotations.push({
@@ -95,7 +106,7 @@ class Content extends Component {
         })
     };
 
-    submitAnnotation = event => {
+    submitAnnotation = () => {
         fetch(`https://script-annotator.herokuapp.com/submit/${this.props.filename}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -104,7 +115,7 @@ class Content extends Component {
             body: JSON.stringify(this.state.annotations)
         })
             .then(result => result.json())
-            .then(result => console.log(result))
+            .then(({acts}) => this.setState({acts: acts}))
             .catch(error => {
                 console.error(error);
                 this.setState({error: error.message})
@@ -117,11 +128,11 @@ class Content extends Component {
 
     render() {
         return (
-            this.props.acts !== undefined && <div>
+            this.state.acts !== undefined && <div>
                 <Typography component='h2' variant='h3' align='center'>{this.props.title}</Typography>
 
                 <Container className="scrollable">
-                    {this.props.acts.map((act, key) => (
+                    {this.state.acts.map((act, key) => (
                         <Act key={key} act_num={act.act_num} scenes={act.scenes}
                              recordStart={this.storeLineNum('start').bind(this)}
                              recordEnd={this.storeLineNum('end').bind(this)}

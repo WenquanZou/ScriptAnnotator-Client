@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Stagedir from "./Stagedir";
-import Card from "@material-ui/core/Card";
+import Line from "./Line"
 
 export default class Speech extends Component {
     render() {
@@ -13,14 +13,11 @@ export default class Speech extends Component {
                             return <Stagedir key={key} dir={line.dir}/>
                         } else {
                             return (
-                                <Card key={key} className="line"
-                                      onMouseDown={this.props.recordStart(line.line_num, this.props.speaker, this.props.publicKey)}
-                                      onMouseUp={this.props.recordEnd(line.line_num, this.props.speaker, this.props.publicKey)}
-                                      onContextMenu={
-                                          this.props.onRightClick(line.line_num, this.props.speaker, line.text)
-                                      }>
-                                    {line.text}<span className="annotation">{line.annotation}</span>
-                                </Card>
+                                <Line key={key} recordStart={this.props.recordStart}
+                                      recordEnd={this.props.recordEnd}
+                                      onRightClick={this.props.onRightClick}
+                                      speaker={this.props.speaker}
+                                      line={line}/>
 
                             )
                         }

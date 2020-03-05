@@ -42,7 +42,7 @@ export default class Window extends Component {
                     <Menu plays={this.props.plays} loadPlay={this.loadPlay.bind(this)}/>
                 </Grid>
                 <Grid item xs={8}>
-                    <Content acts={this.state.acts} title={this.state.title} filename={this.state.filename}/>
+                    <Content acts={this.state.acts} title={this.state.title} filename={this.state.filename} loadPlay={this.loadPlay.bind(this)}/>
                 </Grid>
             </Grid>
         );

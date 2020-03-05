@@ -62,14 +62,11 @@
 
 .line {
     font-size: 18px;
-    max-width: 700px;
-    min-width: 700px;
 }
 
 .annotation {
     font-size: 20px;
     color: white;
-    background-color: darkblue;
 }
 
 .tooltip {
