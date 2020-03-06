@@ -106,7 +106,6 @@ class Content extends Component {
     };
 
     submitAnnotation = () => {
-        console.log(this.state.annotation);
         fetch(`https://script-annotator.herokuapp.com/submit/${this.props.filename}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -121,6 +120,21 @@ class Content extends Component {
                 this.setState({error: error.message})
             })
     };
+
+    downloadFile = () => {
+        fetch(`https://script-annotator.herokuapp.com/download/${this.props.filename}`, {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            method: 'get'
+        })
+            .then(result => window.location=result.url)
+            .catch(error => {
+                console.error(error);
+                this.setState({error: error.message})
+            })
+    };
+
 
     closeModal = event => {
         this.setState({modalOpen: false})
@@ -146,7 +160,7 @@ class Content extends Component {
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="outlined" color="primary" onClick={this.submitAnnotation.bind(this)}>
+                        <Button variant="outlined" color="primary" onClick={this.downloadFile.bind(this)}>
                             Download XML file
                         </Button>
                     </Grid>
