@@ -39,7 +39,6 @@ class Content extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log(nextProps)
         this.setState({acts: nextProps.acts});
     }
 
@@ -107,6 +106,7 @@ class Content extends Component {
     };
 
     submitAnnotation = () => {
+        console.log(this.state.annotation);
         fetch(`https://script-annotator.herokuapp.com/submit/${this.props.filename}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
