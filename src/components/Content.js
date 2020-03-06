@@ -84,6 +84,7 @@ class Content extends Component {
             lineStart = start[0];
             lineEnd = end[0];
             lineSpeaker = start[1];
+            if (lineSpeaker !== speaker) return;
             lineContent = window.getSelection().toString();
             if (lineContent.length === 0) {
                 lineContent = content;
