@@ -21,7 +21,7 @@ export default class Window extends Component {
      */
     loadPlay = playname => event => {
         event.preventDefault();
-        fetch(`https://script-annotator.herokuapp.com/play/${playname}`, {
+        fetch(`https://script-annotator.herokuapp.com/play/${this.props.user}/${playname}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
@@ -42,7 +42,7 @@ export default class Window extends Component {
                     <Menu plays={this.props.plays} loadPlay={this.loadPlay.bind(this)}/>
                 </Grid>
                 <Grid item xs={8}>
-                    <Content acts={this.state.acts} title={this.state.title} filename={this.state.filename} loadPlay={this.loadPlay.bind(this)}/>
+                    <Content user={this.props.user} acts={this.state.acts} title={this.state.title} filename={this.state.filename} loadPlay={this.loadPlay.bind(this)}/>
                 </Grid>
             </Grid>
         );

@@ -107,7 +107,7 @@ class Content extends Component {
     };
 
     submitAnnotation = () => {
-        fetch(`https://script-annotator.herokuapp.com/submit/${this.props.filename}`, {
+        fetch(`https://script-annotator.herokuapp.com/submit/${this.props.user}/${this.props.filename}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
@@ -123,7 +123,7 @@ class Content extends Component {
     };
 
     downloadFile = () => {
-        fetch(`https://script-annotator.herokuapp.com/download/${this.props.filename}`, {
+        fetch(`https://script-annotator.herokuapp.com/download/${this.props.user}/${this.props.filename}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },

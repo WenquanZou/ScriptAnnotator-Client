@@ -12,7 +12,8 @@ class Annotator extends React.Component {
     // When mounted, tries to get the list of plays.
     // Renders sidebar if OK, otherwise shows error.
     componentDidMount() {
-        fetch('https://script-annotator.herokuapp.com//plays', {
+        let user = this.props.location.pathname.split("/")[2];
+        fetch(`https://script-annotator.herokuapp.com/plays/${user}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
@@ -26,18 +27,20 @@ class Annotator extends React.Component {
     }
 
     render() {
+
+        let user = this.props.location.pathname.split("/")[2];
         return(
                 <Container>
                     <Typography component='h1' variant='h2' align='center' gutterBottom>Annotation tool for
                         Shakespeare's plays</Typography>
                     {
-                        this.state.plays === undefined && <p>Loading plays...</p>
+                        user !== undefined && this.state.plays === undefined && <p>Loading plays...</p>
                     }
                     {
                         this.state.error && <p>{this.state.error}</p>
                     }
                     {
-                        this.state.plays !== undefined && <Window plays={this.state.plays}/>
+                        user !== undefined && this.state.plays !== undefined && <Window user={user} plays={this.state.plays}/>
                     }
                 </Container>
         )
